@@ -50,8 +50,7 @@
       </a>
 
   </tr>
-  <tr th:each="appointment : ${appointments}">
-    <a th:href="@{/{id}/appointments/{doctorId}/saveAppointment (id=${hospitalId},doctorId=${appointment.doctor.id})}">
+    <a th:href="@{/{id}/appointments/saveAppointment (id=${hospitalId})}">
       <button class="btn btn-primary" type="button">Create</button>
     </a>
   </tr>

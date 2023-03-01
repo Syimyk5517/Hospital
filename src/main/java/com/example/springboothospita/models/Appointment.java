@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 import static jakarta.persistence.CascadeType.*;
-import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 

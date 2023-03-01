@@ -16,7 +16,7 @@ public class DoctorController {
     private final DepartmentService departmentService;
 
     @GetMapping
-    String getAllDepartments(@PathVariable("id") Long id, Model model,@ModelAttribute("department") Department department){
+    String getAllDepartments(@PathVariable("id") Long id, Model model){
         model.addAttribute("doctors",doctorService.getAll(id));
         model.addAttribute("departments",departmentService.getAll(id));
         model.addAttribute("hospitalId",id);
@@ -38,7 +38,7 @@ public class DoctorController {
                        @PathVariable("doctorId")Long doctorId,
                        Model model){
         model.addAttribute("doctor", doctorService.findById(doctorId));
-        model.addAttribute("departments", doctorService.getAllDepartmentDoctorById(doctorId));
+        model.addAttribute("departments", departmentService.getAllDepartmentByDoctorId(doctorId));
         model.addAttribute("doctors",doctorService.getAll(id));
         return "doctor/departments";
     }
@@ -49,17 +49,16 @@ public class DoctorController {
         return "doctor/assignToDepartment";
     }
     @PostMapping("/{doctorId}/saveAssignDepartment")
-    String saveAssignDepartment(@PathVariable("doctorId")Long doctorId,
-                        @ModelAttribute("doctor") Doctor doctor){
-//        departmentService.assignDoctor(doctorId, doctor);
+    String saveAssignDepartment(@PathVariable("doctorId")Long doctorId, @ModelAttribute("doctor") Doctor doctor){
+        doctorService.assignDoctor(doctorId,doctor);
         return "redirect:/{id}/doctors";
     }
-    @DeleteMapping("{doctorId}/delete")
-    String deleteById(@PathVariable("doctorId") Long doctorId, @PathVariable String id) {
-        doctorService.delete(doctorId);
-        return "redirect:/{id}/doctors";
-
-    }
+//    @DeleteMapping("{doctorId}/delete")
+//    String deleteById(@PathVariable("doctorId") Long doctorId, @PathVariable String id) {
+//        doctorService.delete(doctorId);
+//        return "redirect:/{id}/doctors";
+//
+//    }
     @GetMapping("/{doctorId}/edit")
     String getUpdate(@PathVariable("doctorId") Long doctorId, Model model,@PathVariable("id") Long id) {
         model.addAttribute("doctor",doctorService.findById(doctorId));

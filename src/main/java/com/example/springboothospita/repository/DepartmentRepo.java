@@ -9,4 +9,6 @@ import java.util.List;
 public interface DepartmentRepo extends JpaRepository<Department,Long> {
     @Query("select d from Department d where d.hospital.id=:id")
     List<Department> getAllByHospitalId(Long id);
+    @Query("select d from Department  d join d.doctors doctor where doctor.id=:Id")
+    List<Department> getAllDepartmentDoctorById(Long Id);
 }

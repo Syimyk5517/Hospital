@@ -4,6 +4,7 @@ import com.example.springboothospita.models.Department;
 import com.example.springboothospita.models.Doctor;
 import com.example.springboothospita.models.Hospital;
 import com.example.springboothospita.repository.AppointmentRepo;
+import com.example.springboothospita.repository.DepartmentRepo;
 import com.example.springboothospita.repository.DoctorRepo;
 import com.example.springboothospita.repository.HospitalRepo;
 import com.example.springboothospita.services.DoctorService;
@@ -21,6 +22,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepo doctorRepo;
     private final HospitalRepo hospitalRepo;
     private final AppointmentRepo appointmentRepo;
+    private final DepartmentRepo departmentRepo;
     @Override
     public List<Doctor> getAll(Long id) {
         return doctorRepo.getAllHospitalById(id);
@@ -51,6 +53,15 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public void assignDoctor(Long doctorId, Doctor doctor) {
+        Department department = departmentRepo.findById(doctor.getDepartmentId()).orElseThrow();
+        Doctor oldDoctor = doctorRepo.findById(doctorId).orElseThrow();
+        oldDoctor.addDepartment(department);
+        department.addDoctor(doctor);
+        doctorRepo.save(oldDoctor);
+    }
+
+    @Override
     public void delete(Long id) {
         Doctor doctor = findById(id);
         Hospital hospital = doctor.getHospital();
@@ -67,8 +78,8 @@ public class DoctorServiceImpl implements DoctorService {
       doctorRepo.deleteById(id);
     }
 
-    @Override
-    public List<Department> getAllDepartmentDoctorById(Long doctorId) {
-        return doctorRepo.getAllDepartmentDoctorById(doctorId);
-    }
+//    @Override
+//    public List<Department> getAllDepartmentDoctorById(Long doctorId) {
+//        return doctorRepo.getAllDepartmentDoctorById(doctorId);
+//    }
 }

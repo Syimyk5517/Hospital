@@ -26,18 +26,17 @@ public class AppointmentController {
         model.addAttribute("hospitalId",id);
         return "appointment/appointments";
     }
-
-    @GetMapping("/{doctorId}/saveAppointment")
-    String save(Model model,@PathVariable("id")Long id,@PathVariable("doctorId")Long doctorId ){
+    @GetMapping("/saveAppointment")
+    String save(Model model,@PathVariable("id")Long id ){
         model.addAttribute("appointment",new Appointment());
         model.addAttribute("patients",patientService.getAllPatient(id));
         model.addAttribute("doctors",doctorService.getAll(id));
-        model.addAttribute("departments",doctorService.getAllDepartmentDoctorById(doctorId));
+        model.addAttribute("departments",departmentService.getAll(id));
         model.addAttribute("hospitalId",id);
         return "/appointment/saveAppointment";
     }
     @PostMapping("/new")
-    String create(@ModelAttribute("appointment") Appointment appointment,@RequestParam("patientId")Long patientId,@RequestParam("doctorId")Long doctorId, @RequestParam("departmentId") Long departmentId,@PathVariable("id") Long hospitalId ){System.out.println("sasdd");
+    String create(@ModelAttribute("appointment") Appointment appointment,@RequestParam("patientId")Long patientId,@RequestParam("doctorId")Long doctorId, @RequestParam("departmentId") Long departmentId,@PathVariable("id") Long hospitalId ) {
         appointmentService.save(hospitalId,patientId,doctorId,departmentId,appointment);
         return "redirect:/{id}/appointments";
     }
@@ -55,9 +54,9 @@ public class AppointmentController {
         appointmentService.update(hospitalId,patientId,doctorId,departmentId,appointment,appointmentId);
         return "redirect:/{id}/appointments";
     }
-    @GetMapping("{appointmentId}/delete")
-    String delete (@PathVariable("appointmentId") Long appointmentId) {
-       appointmentService.deleteById(appointmentId);
-        return "redirect:/{id}/appointments";
-    }
+//    @GetMapping("{appointmentId}/delete")
+//    String delete (@PathVariable("appointmentId") Long appointmentId) {
+//       appointmentService.deleteById(appointmentId);
+//        return "redirect:/{id}/appointments";
+//    }
     }

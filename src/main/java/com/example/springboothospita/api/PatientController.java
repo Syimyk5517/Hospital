@@ -18,8 +18,7 @@ public class PatientController {
 
     @GetMapping
     String getAllDepartments(@PathVariable("id") Long id,Model model){
-       List<Patient> patients = patientService.getAllPatient(id);
-        model.addAttribute("patients",patients);
+        model.addAttribute("patients",patientService.getAllPatient(id));
         model.addAttribute("hospitalId",id);
         return "patient/patients";
     }
@@ -48,9 +47,9 @@ public class PatientController {
        patientService.updatePatient(patientId,patient);
         return "redirect:/{id}/patients";
     }
-    @DeleteMapping("{patientId}/delete")
-    String delete (@PathVariable("patientId") Long patientId) {
-        patientService.delete(patientId);
-        return "redirect:/{id}/patients";
-    }
+//    @DeleteMapping("{patientId}/delete")
+//    String delete (@PathVariable("patientId") Long patientId) {
+//        patientService.delete(patientId);
+//        return "redirect:/{id}/patients";
+//    }
 }

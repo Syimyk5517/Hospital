@@ -2,6 +2,7 @@ package com.example.springboothospita.services.serviceImpl;
 
 import com.example.springboothospita.models.Appointment;
 import com.example.springboothospita.models.Department;
+import com.example.springboothospita.models.Doctor;
 import com.example.springboothospita.models.Hospital;
 import com.example.springboothospita.repository.AppointmentRepo;
 import com.example.springboothospita.repository.DepartmentRepo;
@@ -78,12 +79,9 @@ public class DepartmentServiceImpl implements DepartmentService {
           departmentRepo.save(oldDepartment);
     }
 
-//    @Override
-//    public void assignDoctor(Long doctorId, Doctor doctor) {
-//        Department department = departmentRepo.findById(doctor.getDepartmentId()).orElseThrow();
-//        Doctor oldDoctor = doctorRepo.findById(doctorId).orElseThrow();
-//        oldDoctor.addDepartment(department);
-//        department.addDoctor(doctor);
-//        departmentRepo.save();
-//    }
+    @Override
+    public List<Department> getAllDepartmentByDoctorId(Long id) {
+        return departmentRepo.getAllDepartmentDoctorById(id);
+    }
+
 }

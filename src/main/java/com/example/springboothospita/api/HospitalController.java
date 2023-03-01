@@ -33,7 +33,7 @@ public class HospitalController {
         return "hospital/savePage";
     }
 
-    @DeleteMapping("/{id}/delete")
+    @GetMapping("/{id}/delete")
     String deleteById(@PathVariable("id") Long id) {
         hospitalService.deleteById(id);
         return "redirect:/hospitals";

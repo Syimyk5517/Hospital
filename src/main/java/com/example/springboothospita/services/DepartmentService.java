@@ -1,6 +1,7 @@
 package com.example.springboothospita.services;
 
 import com.example.springboothospita.models.Department;
+import com.example.springboothospita.models.Doctor;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface DepartmentService {
     Department finById(Long id);
     void deleteById(Long id);
     void update(Long departmentId,Department department);
-//    void assignDoctor(Long doctorId, Doctor doctor);
+    List<Department> getAllDepartmentByDoctorId(Long id);
 }

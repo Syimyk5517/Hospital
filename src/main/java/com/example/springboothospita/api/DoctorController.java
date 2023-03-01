@@ -53,12 +53,12 @@ public class DoctorController {
         doctorService.assignDoctor(doctorId,doctor);
         return "redirect:/{id}/doctors";
     }
-//    @DeleteMapping("{doctorId}/delete")
-//    String deleteById(@PathVariable("doctorId") Long doctorId, @PathVariable String id) {
-//        doctorService.delete(doctorId);
-//        return "redirect:/{id}/doctors";
-//
-//    }
+    @GetMapping("{doctorId}/delete")
+    String deleteById(@PathVariable("doctorId") Long doctorId, @PathVariable String id) {
+        doctorService.delete(doctorId);
+        return "redirect:/{id}/doctors";
+
+    }
     @GetMapping("/{doctorId}/edit")
     String getUpdate(@PathVariable("doctorId") Long doctorId, Model model,@PathVariable("id") Long id) {
         model.addAttribute("doctor",doctorService.findById(doctorId));

@@ -50,7 +50,7 @@
       <td>
         <a th:href="@{/{id}/patients/{patientId}/edit(id=${hospitalId},patientId=${patient.id})}">
           <input type="submit" class="btn btn-outline-primary"  th:value="  Update  ">
-          <form th:method="DELETE"
+          <form th:method="GET"
                 th:action="@{/{id}/patients/{patientId}/delete(id=${hospitalId}, patientId=${patient.id})}">
             <input type="submit" class="btn btn-outline-primary" th:value="  Delete  "></input>
           </form>

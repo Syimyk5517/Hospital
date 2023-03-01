@@ -54,9 +54,9 @@ public class AppointmentController {
         appointmentService.update(hospitalId,patientId,doctorId,departmentId,appointment,appointmentId);
         return "redirect:/{id}/appointments";
     }
-//    @GetMapping("{appointmentId}/delete")
-//    String delete (@PathVariable("appointmentId") Long appointmentId) {
-//       appointmentService.deleteById(appointmentId);
-//        return "redirect:/{id}/appointments";
-//    }
+    @GetMapping("{appointmentId}/delete")
+    String delete (@PathVariable("appointmentId") Long appointmentId) {
+       appointmentService.deleteById(appointmentId);
+        return "redirect:/{id}/appointments";
+    }
     }

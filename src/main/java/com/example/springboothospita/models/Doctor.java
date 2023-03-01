@@ -32,7 +32,7 @@ public class Doctor {
 
     private String email;
 
-    @ManyToMany(mappedBy = "doctor",cascade = {REFRESH, DETACH, MERGE,PERSIST})
+    @ManyToMany(mappedBy = "doctors",cascade = {REFRESH, DETACH, MERGE,PERSIST})
     private List<Department> departments ;
     public  void addDepartment(Department department){
         if (departments == null){
